@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Stethoscope, ShieldCheck, ClipboardList } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -25,9 +26,12 @@ function Index() {
             </div>
             <span className="font-display font-semibold text-lg">ZorgRapport</span>
           </div>
-          <a href="/login" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-            Inloggen
-          </a>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <a href="/login" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+              Inloggen
+            </a>
+          </div>
         </div>
       </header>
 

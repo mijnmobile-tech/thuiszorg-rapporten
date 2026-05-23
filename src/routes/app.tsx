@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
@@ -12,9 +12,12 @@ import {
   User as UserIcon,
   MapPin,
   ClipboardList,
+  Shield,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
+import { useRole } from "@/hooks/use-role";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -84,6 +87,7 @@ function categoryColor(cat: string) {
 
 function AppPage() {
   const { user, loading } = useAuth();
+  const { isAdmin } = useRole();
   const [clients, setClients] = useState<Client[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
@@ -210,10 +214,21 @@ function AppPage() {
           ))}
         </div>
 
-        <div className="p-4 border-t border-sidebar-border">
-          <Button variant="ghost" onClick={handleLogout} className="w-full justify-start text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground">
-            <LogOut className="size-4 mr-2" /> Uitloggen
-          </Button>
+        <div className="p-4 border-t border-sidebar-border space-y-1">
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 w-full rounded-md px-3 py-2 text-sm hover:bg-sidebar-accent text-sidebar-foreground"
+            >
+              <Shield className="size-4" /> Admin backend
+            </Link>
+          )}
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" onClick={handleLogout} className="flex-1 justify-start text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground">
+              <LogOut className="size-4 mr-2" /> Uitloggen
+            </Button>
+            <ThemeToggle className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground" />
+          </div>
         </div>
       </aside>
 
