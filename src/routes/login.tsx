@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const Route = createFileRoute("/login")({ component: LoginPage });
 
@@ -71,7 +72,8 @@ function LoginPage() {
       </div>
 
       {/* Form side */}
-      <div className="flex items-center justify-center p-6 sm:p-12">
+      <div className="flex items-center justify-center p-6 sm:p-12 relative">
+        <div className="absolute top-4 right-4"><ThemeToggle /></div>
         <div className="w-full max-w-sm">
           <a href="/" className="text-sm text-muted-foreground hover:text-foreground">← terug</a>
           <h1 className="mt-4 text-2xl font-semibold">Welkom terug</h1>
