@@ -14,7 +14,98 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clients: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          date_of_birth: string | null
+          full_name: string
+          id: string
+          location: string | null
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          full_name: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          full_name?: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          author_id: string
+          category: Database["public"]["Enums"]["report_category"]
+          client_id: string
+          content: string
+          created_at: string
+          id: string
+          report_date: string
+          report_time: string
+        }
+        Insert: {
+          author_id: string
+          category?: Database["public"]["Enums"]["report_category"]
+          client_id: string
+          content: string
+          created_at?: string
+          id?: string
+          report_date?: string
+          report_time?: string
+        }
+        Update: {
+          author_id?: string
+          category?: Database["public"]["Enums"]["report_category"]
+          client_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          report_date?: string
+          report_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +114,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      report_category:
+        | "algemeen"
+        | "medicatie"
+        | "voeding"
+        | "hygiene"
+        | "sociaal"
+        | "medisch"
+        | "incident"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +248,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      report_category: [
+        "algemeen",
+        "medicatie",
+        "voeding",
+        "hygiene",
+        "sociaal",
+        "medisch",
+        "incident",
+      ],
+    },
   },
 } as const
