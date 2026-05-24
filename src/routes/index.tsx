@@ -46,7 +46,7 @@ function Index() {
               <span className="text-accent">Helder en veilig.</span>
             </h1>
             <p className="mt-5 text-lg text-muted-foreground max-w-lg">
-              Schrijf dagelijkse rapportages per cliënt, vind eerdere notities razendsnel terug en houd je team altijd op de hoogte.
+              Schrijf dagelijkse rapportages per cliënt, vind eerdere notities razendsnel terug en houd je team altijd op de hoogte. Dus dat
             </p>
             <div className="mt-8 flex gap-3">
               <a href="/login" className="rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 shadow-soft">
